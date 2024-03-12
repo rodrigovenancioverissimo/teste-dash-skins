@@ -4,6 +4,9 @@ import { useState } from "react";
 import Joi from "joi";
 import TextInput from "../text-input/text-input";
 import formValidate from "@/utils/form-validate";
+import createUser from "@/axios/create-user.axios";
+import { User } from "@/interfaces/user";
+import { useUserContext } from "@/context/users.context";
 
 const validationSchema = Joi.object({
   name: Joi.string().required().label("Nome"),
@@ -23,26 +26,42 @@ interface Props {
     avatar: string;
   };
   id?: string;
+  afterSubmitting?: () => void;
 }
 
-export default function UserForm({ id, initialValues }: Props) {
-  const iv = initialValues;
-  const [submitting, setSubmitting] = useState(false);
+interface FormValues {
+  name: string;
+  email: string;
+  age: string;
+  avatar: string;
+}
 
-  const onSubmit = async (values: any) => {
+export default function UserForm({
+  id,
+  initialValues,
+  afterSubmitting,
+}: Props) {
+  const [submitting, setSubmitting] = useState(false);
+  const { users, setUsers } = useUserContext();
+
+  const onSubmit = async (values: FormValues) => {
     setSubmitting(true);
+    console.log("Valores do formulário:", values);
     if (id) {
       //update
     } else {
-      //create
+      const user = await createUser({ ...values, age: parseInt(values.age) });
+      console.log(user);
+      setUsers([...users, user]);
+      if (afterSubmitting) afterSubmitting();
     }
-    console.log("Valores do formulário:", values);
     setSubmitting(false);
   };
 
   return (
     <>
       <Form
+        initialValues={initialValues}
         onSubmit={onSubmit}
         validate={(values) => formValidate(values, validationSchema)}
         render={({ handleSubmit }) => (
@@ -52,25 +71,27 @@ export default function UserForm({ id, initialValues }: Props) {
           >
             <Field
               name='name'
-              initialValue={iv?.name}
               render={(props) => <TextInput {...props} label='Nome' />}
             />
             <Field
               name='email'
-              initialValue={iv?.email}
               render={(props) => <TextInput {...props} label='Email' />}
             />
             <Field
               name='age'
               type='number'
-              initialValue={iv?.age.toString()}
               render={(props) => (
-                <TextInput {...props} label='Idade' min={3} max={120} />
+                <TextInput
+                  {...props}
+                  type='number'
+                  label='Idade'
+                  min={3}
+                  max={120}
+                />
               )}
             />
             <Field
               name='avatar'
-              initialValue={iv?.avatar}
               render={(props) => <TextInput {...props} label='Avatar' />}
             />
             <Button type='submit' disabled={submitting}>

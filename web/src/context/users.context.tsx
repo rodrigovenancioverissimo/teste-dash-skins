@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
-import client from "@/utils/axios-client";
 import { User } from "@/interfaces/user";
+import getUsers from "@/axios/get-users.axios";
 
 interface Props {
   children: React.ReactNode;
@@ -8,6 +8,7 @@ interface Props {
 
 interface Context {
   users: User[];
+  setUsers: React.Dispatch<React.SetStateAction<User[]>>;
 }
 
 const UserContext = createContext({} as Context);
@@ -16,16 +17,6 @@ export const useUserContext = () => useContext(UserContext);
 
 export const UserProvider = ({ children }: Props) => {
   const [users, setUsers] = useState<User[]>([]);
-
-  const getUsers = async () => {
-    try {
-      const response = await client.get("/users");
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching users:", error);
-      throw error;
-    }
-  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -41,6 +32,8 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ users }}>{children}</UserContext.Provider>
+    <UserContext.Provider value={{ users, setUsers }}>
+      {children}
+    </UserContext.Provider>
   );
 };

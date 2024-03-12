@@ -19,7 +19,7 @@ export default function UsersAdd() {
         Adicionar
       </Button>
       <Modal isOpen={modalOpen} onClose={closeModal}>
-        <UserForm />
+        <UserForm afterSubmitting={closeModal} />
       </Modal>
     </>
   );
