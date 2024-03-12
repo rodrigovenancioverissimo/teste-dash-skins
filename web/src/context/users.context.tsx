@@ -9,6 +9,10 @@ interface Props {
 interface Context {
   users: User[];
   setUsers: React.Dispatch<React.SetStateAction<User[]>>;
+  deletedUser?: string;
+  setDeletedUser: React.Dispatch<React.SetStateAction<string | undefined>>;
+  blinkUser?: string;
+  setBlinkUser: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 const UserContext = createContext({} as Context);
@@ -17,6 +21,8 @@ export const useUserContext = () => useContext(UserContext);
 
 export const UserProvider = ({ children }: Props) => {
   const [users, setUsers] = useState<User[]>([]);
+  const [deletedUser, setDeletedUser] = useState<string>();
+  const [blinkUser, setBlinkUser] = useState<string>();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -32,7 +38,16 @@ export const UserProvider = ({ children }: Props) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ users, setUsers }}>
+    <UserContext.Provider
+      value={{
+        users,
+        setUsers,
+        deletedUser,
+        setDeletedUser,
+        blinkUser,
+        setBlinkUser,
+      }}
+    >
       {children}
     </UserContext.Provider>
   );

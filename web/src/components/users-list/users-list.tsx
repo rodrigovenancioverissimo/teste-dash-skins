@@ -1,13 +1,12 @@
 import { useUserContext } from "@/context/users.context";
-import { MdDelete } from "react-icons/md";
-import Button from "../button/button";
 import UsersEdit from "../users-edit/users-edit";
 import UserDelete from "../user-delete/user-delete";
+import { useState } from "react";
 
 const columns = ["Nome", "Email", "Idade", "Avatar", "Ações"];
 
 export default function UsersList() {
-  const { users } = useUserContext();
+  const { users, deletedUser, blinkUser } = useUserContext();
 
   return (
     <>
@@ -23,11 +22,15 @@ export default function UsersList() {
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody className='transition duration-700'>
               {users.map((item, i) => (
                 <tr
-                  className='bg-white border-b hover:bg-gray-50 whitespace-nowrap h-14'
                   key={i}
+                  className={`bg-white border-b hover:bg-gray-50 whitespace-nowrap h-14 ${
+                    deletedUser === item._id
+                      ? "transition duration-700 opacity-0"
+                      : ""
+                  }${blinkUser === item._id ? "blink" : ""}`}
                 >
                   <td className='pl-4'>{item.name}</td>
                   <td className='pl-4'>{item.email}</td>

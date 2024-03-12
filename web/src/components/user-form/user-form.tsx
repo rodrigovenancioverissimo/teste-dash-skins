@@ -39,7 +39,7 @@ export default function UserForm({
 }: Props) {
   const iv = initialValues;
   const [submitting, setSubmitting] = useState(false);
-  const { users, setUsers } = useUserContext();
+  const { users, setUsers, setBlinkUser } = useUserContext();
 
   const onSubmit = async (values: FormValues) => {
     setSubmitting(true);
@@ -56,6 +56,10 @@ export default function UserForm({
       if (user) {
         setUsers([...users, user]);
         if (afterSubmitting) afterSubmitting();
+        setBlinkUser(user._id);
+        setTimeout(() => {
+          setBlinkUser(undefined);
+        }, 2000);
       }
     }
     setSubmitting(false);

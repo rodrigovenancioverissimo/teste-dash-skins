@@ -5,14 +5,17 @@ import deleteUser from "@/axios/delete-user.axios";
 import { useUserContext } from "@/context/users.context";
 
 export default function UserDelete({ id }: { id: string }) {
-  const { users, setUsers } = useUserContext();
+  const { users, setUsers, setDeletedUser } = useUserContext();
   const [submitting, setSubmitting] = useState(false);
 
   const onSubmit = async () => {
     setSubmitting(true);
     await deleteUser(id);
-    setUsers(users.filter((u) => u._id !== id));
-    setSubmitting(false);
+    setDeletedUser(id);
+    setTimeout(() => {
+      setUsers(users.filter((u) => u._id !== id));
+      setSubmitting(false);
+    }, 700);
   };
 
   return (

@@ -19,7 +19,7 @@ O objetivo deste code test é avaliar os conhecimentos do candidato para uma pos
 ### Requisitos Obrigatórios do Projeto
 O projeto deve atender aos seguintes requisitos:
 - [x] 1. Criação de uma tabela para exibir os dados de usuários.
-- [ ] 2. A tabela deve ter as seguintes colunas:
+- [x] 2. A tabela deve ter as seguintes colunas:
   - Nome (string)
   - Idade (number)
   - Email (string)
@@ -27,14 +27,14 @@ O projeto deve atender aos seguintes requisitos:
   - Ações (botões para editar e excluir o usuário)
 - [x] 3. Os dados dos usuários devem ser obtidos por meio de uma API RESTful, buscando em um banco de dados MongoDB (pode-se utilizar um free cluster disponível no Mongo Atlas). Os dados podem ser
 mockados.
-- [ ] 4. Ao clicar no botão "Editar" de um usuário, um modal deve ser exibido com um formulário para editar os dados do usuário.
-- [ ] 5. O modal deve conter os campos:
+- [x] 4. Ao clicar no botão "Editar" de um usuário, um modal deve ser exibido com um formulário para editar os dados do usuário.
+- [x] 5. O modal deve conter os campos:
   - Nome (string)
   - Idade (number)
   - Email (string)
   - Avatar (string)
-- [ ] 6. O formulário de edição deve permitir a validação dos campos e exibir mensagens de erro em caso de valores inválidos.
-- [ ] 7. Ao salvar as alterações no formulário, os dados do usuário devem ser enviados para a API e a tabela deve ser atualizada com os novos dados através de gerenciamento de estado.
+- [x] 6. O formulário de edição deve permitir a validação dos campos e exibir mensagens de erro em caso de valores inválidos.
+- [x] 7. Ao salvar as alterações no formulário, os dados do usuário devem ser enviados para a API e a tabela deve ser atualizada com os novos dados através de gerenciamento de estado.
 - [ ] 8. Ao excluir ou adicionar um usuário deve-se realizar uma animação na tabela, representando a exclusão ou inclusão desse novo elemento.
 - [ ] 9. O projeto deve ser responsivo e se adaptar a diferentes tamanhos de tela.
 - [ ] 10.  Devem ser escritos testes unitários para as principais funcionalidades do projeto.
