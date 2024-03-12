@@ -1,4 +1,4 @@
-const columns = ["Nome", "Email", "Idade", "Avatar"];
+const columns = ["Nome", "Email", "Idade", "Avatar", "Ações"];
 
 export default function UsersList() {
   return (
@@ -27,6 +27,7 @@ export default function UsersList() {
                   <td className='pl-4'>{item.email}</td>
                   <td className='pl-4'>{item.age}</td>
                   <td className='pl-4'>{item.avatar}</td>
+                  <td className='pl-4'></td>
                 </tr>
               ))}
             </tbody>

@@ -1,3 +1,12 @@
+# Instruções de uso:
+
+Para instalar é simples, basta ter o docker e docker compose em sua máquina e executar o
+comando 
+```
+docker compose up
+```
+
+
 # CODE TEST DASH SKINS
 ## Descrição do Projeto
 O objetivo deste code test é avaliar os conhecimentos do candidato para uma posição de desenvolvedor full-stack. O candidato será responsável por criar uma tabela de usuários. O projeto deve ser desenvolvido utilizando as seguintes tecnologias e conceitos:
