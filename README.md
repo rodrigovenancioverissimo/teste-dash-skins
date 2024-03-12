@@ -1,3 +1,5 @@
+[https://youtu.be/mVeIo7MCtM0](https://youtu.be/mVeIo7MCtM0)
+
 # Instruções de uso:
 
 Para instalar é simples, basta ter o docker e docker compose em sua máquina e executar o
