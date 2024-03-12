@@ -1,6 +1,10 @@
+import { useUserContext } from "@/context/users.context";
+
 const columns = ["Nome", "Email", "Idade", "Avatar", "Ações"];
 
 export default function UsersList() {
+  const { users } = useUserContext();
+
   return (
     <>
       <div>
@@ -16,9 +20,7 @@ export default function UsersList() {
               </tr>
             </thead>
             <tbody>
-              {[
-                { name: "User", email: "user@email.com", age: 18, avatar: "" },
-              ].map((item, i) => (
+              {users.map((item, i) => (
                 <tr
                   className='bg-white border-b hover:bg-gray-50 whitespace-nowrap h-14'
                   key={i}
