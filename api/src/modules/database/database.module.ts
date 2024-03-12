@@ -16,7 +16,6 @@ import { MongooseModule } from '@nestjs/mongoose';
       useFactory: async (configService: ConfigService) => {
         const { uri } =
           configService.get<ReturnType<typeof databaseConfig>>('database');
-        console.log(uri);
         return { uri };
       },
     }),

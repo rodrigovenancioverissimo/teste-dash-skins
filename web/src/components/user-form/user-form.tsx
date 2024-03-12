@@ -5,8 +5,9 @@ import Joi from "joi";
 import TextInput from "../text-input/text-input";
 import formValidate from "@/utils/form-validate";
 import createUser from "@/axios/create-user.axios";
-import { User } from "@/interfaces/user";
 import { useUserContext } from "@/context/users.context";
+import { User } from "@/interfaces/user";
+import updateUser from "@/axios/update-user.axios";
 
 const validationSchema = Joi.object({
   name: Joi.string().required().label("Nome"),
@@ -15,16 +16,11 @@ const validationSchema = Joi.object({
     .required()
     .label("Email"),
   age: Joi.number().required().label("Idade").min(3).max(120),
-  avatar: Joi.string(),
+  avatar: Joi.string().allow("", null),
 });
 
 interface Props {
-  initialValues?: {
-    name: string;
-    email: string;
-    age: number;
-    avatar: string;
-  };
+  initialValues?: Partial<User>;
   id?: string;
   afterSubmitting?: () => void;
 }
@@ -41,19 +37,26 @@ export default function UserForm({
   initialValues,
   afterSubmitting,
 }: Props) {
+  const iv = initialValues;
   const [submitting, setSubmitting] = useState(false);
   const { users, setUsers } = useUserContext();
 
   const onSubmit = async (values: FormValues) => {
     setSubmitting(true);
-    console.log("Valores do formulário:", values);
+    const age = parseInt(values.age);
     if (id) {
-      //update
+      const user = await updateUser({ ...values, age, id });
+      if (user) {
+        const updatedUsers = users.map((u) => (u._id === user?._id ? user : u));
+        setUsers(updatedUsers);
+        if (afterSubmitting) afterSubmitting();
+      }
     } else {
-      const user = await createUser({ ...values, age: parseInt(values.age) });
-      console.log(user);
-      setUsers([...users, user]);
-      if (afterSubmitting) afterSubmitting();
+      const user = await createUser({ ...values, age });
+      if (user) {
+        setUsers([...users, user]);
+        if (afterSubmitting) afterSubmitting();
+      }
     }
     setSubmitting(false);
   };
@@ -61,8 +64,13 @@ export default function UserForm({
   return (
     <>
       <Form
-        initialValues={initialValues}
         onSubmit={onSubmit}
+        initialValues={{
+          age: iv?.age,
+          avatar: iv?.avatar,
+          email: iv?.email,
+          name: iv?.name,
+        }}
         validate={(values) => formValidate(values, validationSchema)}
         render={({ handleSubmit }) => (
           <form

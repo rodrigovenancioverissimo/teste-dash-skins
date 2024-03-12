@@ -14,8 +14,8 @@ export default function TextInput({
 }: Props) {
   return (
     <>
-      <div className=''>
-        <label className='text-gray-700 text-sm font-bold mb-2' htmlFor='input'>
+      <div className='flex flex-col'>
+        <label className='text-gray-700 text-sm font-bold' htmlFor='input'>
           {label}
         </label>
         <input
