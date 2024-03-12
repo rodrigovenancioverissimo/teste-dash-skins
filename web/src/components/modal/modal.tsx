@@ -20,10 +20,17 @@ const Modal = ({ isOpen, onClose, children }: Props) => {
   return (
     <>
       {isOpen && (
-        <div className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50'>
-          <div className='bg-white p-4 rounded-md shadow-md' ref={modalRef}>
+        <div
+          data-testid='outside'
+          className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50'
+        >
+          <div
+            className='bg-white xs:p-1 md:p-4 rounded-md shadow-md'
+            ref={modalRef}
+          >
             <div className='flex justify-end'>
               <button
+                data-testid='close-button'
                 className='text-gray-500 hover:text-gray-800 focus:outline-none'
                 onClick={onClose}
               >

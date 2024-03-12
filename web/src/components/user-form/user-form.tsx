@@ -79,7 +79,7 @@ export default function UserForm({
         render={({ handleSubmit }) => (
           <form
             onSubmit={handleSubmit}
-            className='bg-white  p-8 mb-4 flex flex-col gap-4'
+            className='bg-white p-2 sm:p-8 mb-4 flex flex-col gap-4'
           >
             <Field
               name='name'

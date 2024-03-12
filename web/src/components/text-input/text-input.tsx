@@ -1,17 +1,12 @@
 import { InputHTMLAttributes } from "react";
 import { FieldRenderProps } from "react-final-form";
 
-type Props = FieldRenderProps<string> &
+type Props = Partial<FieldRenderProps<string>> &
   InputHTMLAttributes<HTMLInputElement> & {
     label?: string;
   };
 
-export default function TextInput({
-  label,
-  input,
-  meta: { touched, error },
-  ...rest
-}: Props) {
+export default function TextInput({ label, input, meta, ...rest }: Props) {
   return (
     <>
       <div className='flex flex-col'>
@@ -26,7 +21,9 @@ export default function TextInput({
           {...input}
           {...rest}
         />
-        <div className='text-red-500 text-xs italic'>{touched && error}</div>
+        <div className='text-red-500 text-xs italic'>
+          {meta?.touched && meta?.error}
+        </div>
       </div>
     </>
   );

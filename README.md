@@ -35,8 +35,8 @@ mockados.
   - Avatar (string)
 - [x] 6. O formulário de edição deve permitir a validação dos campos e exibir mensagens de erro em caso de valores inválidos.
 - [x] 7. Ao salvar as alterações no formulário, os dados do usuário devem ser enviados para a API e a tabela deve ser atualizada com os novos dados através de gerenciamento de estado.
-- [ ] 8. Ao excluir ou adicionar um usuário deve-se realizar uma animação na tabela, representando a exclusão ou inclusão desse novo elemento.
-- [ ] 9. O projeto deve ser responsivo e se adaptar a diferentes tamanhos de tela.
+- [x] 8. Ao excluir ou adicionar um usuário deve-se realizar uma animação na tabela, representando a exclusão ou inclusão desse novo elemento.
+- [x] 9. O projeto deve ser responsivo e se adaptar a diferentes tamanhos de tela.
 - [ ] 10.  Devem ser escritos testes unitários para as principais funcionalidades do projeto.
 
 
