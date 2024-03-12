@@ -15,7 +15,7 @@ export default function UsersList() {
                 ))}
               </tr>
             </thead>
-            <tbody className='items-start'>
+            <tbody>
               {[
                 { name: "User", email: "user@email.com", age: 18, avatar: "" },
               ].map((item, i) => (
