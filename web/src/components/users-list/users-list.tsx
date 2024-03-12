@@ -2,6 +2,7 @@ import { useUserContext } from "@/context/users.context";
 import { MdDelete } from "react-icons/md";
 import Button from "../button/button";
 import UsersEdit from "../users-edit/users-edit";
+import UserDelete from "../user-delete/user-delete";
 
 const columns = ["Nome", "Email", "Idade", "Avatar", "Ações"];
 
@@ -35,9 +36,7 @@ export default function UsersList() {
                   <td className='pl-4'>
                     <div className='flex flex-row gap-2'>
                       <UsersEdit user={item} />
-                      <Button className='bg-red-500 hover:bg-red-700'>
-                        <MdDelete />
-                      </Button>
+                      <UserDelete id={item._id} />
                     </div>
                   </td>
                 </tr>

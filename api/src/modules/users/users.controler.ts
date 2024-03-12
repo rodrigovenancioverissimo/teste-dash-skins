@@ -1,30 +1,37 @@
-import { Body, Controller, Get, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
 import { CreateUserService } from './services/create-user/create-user.service';
 import { ListUsersService } from './services/list-users/list-users.service';
 import { CreateUserDto } from './interfaces/create-user.dto';
 import { UpdateUserService } from './services/update-user/update-user.service';
 import { UpdateUserDto } from './interfaces/update-user.dto';
+import { DeleteUserService } from './services/delete-user/delete-user.service';
 
 @Controller('users')
 export class UsersController {
   constructor(
-    private readonly cUser: CreateUserService,
-    private readonly lUser: ListUsersService,
-    private readonly uUser: UpdateUserService,
+    private readonly createService: CreateUserService,
+    private readonly listService: ListUsersService,
+    private readonly updateService: UpdateUserService,
+    private readonly deleteService: DeleteUserService,
   ) {}
 
   @Get()
   list() {
-    return this.lUser.run();
+    return this.listService.run();
   }
 
   @Post()
   create(@Body() body: CreateUserDto) {
-    return this.cUser.run(body);
+    return this.createService.run(body);
   }
 
   @Patch()
   update(@Body() body: UpdateUserDto) {
-    return this.uUser.run(body);
+    return this.updateService.run(body);
+  }
+
+  @Delete()
+  delete(@Body('id') id: string) {
+    return this.deleteService.run(id);
   }
 }
